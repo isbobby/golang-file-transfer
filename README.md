@@ -24,3 +24,12 @@ Verify file is transfered to the other container by viewing logs via `./k8_helpe
 ## Final clean up
 Stop minikube with `minikube stop`<br>
 Delete minikube instance from your docker with `minikube delete`
+
+## Application Description
+Receiver - A simple golang program which listens on port 8080 for TCP connections. When any host connects to it, it will read the incoming data, convert into text file and store in its root directory. The receiver Dockerfile is in its root directory. <br>
+
+Sender - A simple golang program which reads an existing file and save it as byte array, then connects with the specified receiver host and sends it over via TCP connection. The sender Dockerfile is in its root directory.<br>
+
+K8 Pods - There will be two pods created. One is based on the receiver image and the other is based on the sender image. The pod creation specification are stored in **`receiver-deployment.yaml`** and **`sender-deployment.yaml`.** <br>
+
+K8 Service - One single service is created and attached to receiver host. This allows the receiver endpoint to be exposed to other pods. The sender application will use this endpoint for file transfer. The service specification is written in **`receiver-service`.** <br>
