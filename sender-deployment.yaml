@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sender-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: sender-app
+  template:
+    metadata:
+      labels:
+        name: sender-app
+    spec:
+      containers:
+      - name: sender-app
+        image: sender-app
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080

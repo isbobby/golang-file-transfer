@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: receiver-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: receiver-app
+  template:
+    metadata:
+      labels:
+        name: receiver-app
+    spec:
+      containers:
+      - name: receiver-app
+        image: receiver-app
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
